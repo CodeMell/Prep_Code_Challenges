@@ -98,4 +98,40 @@ namespace ConsoleApp
 
         static bool IsLeapYear(int year)
         {
-            return year % 4 == 0 && (year % 100 !=
+            return year % 4 == 0 && (year % 100 != 0 || year % 400 == 0);
+        }
+
+        static bool IsPerfectSequence(int[] sequence)
+        {
+            int product = 1;
+            int sum = 0;
+            foreach (int number in sequence)
+            {
+                if (number < 0)
+                {
+                    return false; // Negative numbers are not valid in a perfect sequence
+                }
+                product *= number;
+                sum += number;
+            }
+            return product == sum;
+        }
+
+        static int[] CalculateRowSums(int[,] matrix)
+        {
+            int rowCount = matrix.GetLength(0);
+            int colCount = matrix.GetLength(1);
+            int[] rowSums = new int[rowCount];
+            for (int i = 0; i < rowCount; i++)
+            {
+                int sum = 0;
+                for (int j = 0; j < colCount; j++)
+                {
+                    sum += matrix[i, j];
+                }
+                rowSums[i] = sum;
+            }
+            return rowSums;
+        }
+    }
+}
